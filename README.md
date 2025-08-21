@@ -1,2 +1,2 @@
-# interfaz_microrred
+# Proyecto Seminario Integrador
 
