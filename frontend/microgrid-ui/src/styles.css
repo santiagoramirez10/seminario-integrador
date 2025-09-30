@@ -1,0 +1,31 @@
+:root {
+  --udea-green: #006633;
+  --udea-light-green: #4CAF50;
+  --udea-white: #FFFFFF;
+  --udea-dark: #333333;
+}
+
+body {
+  background-color: var(--udea-white);
+  color: var(--udea-dark);
+  font-family: 'Roboto', sans-serif;
+}
+
+.navbar {
+  background-color: var(--udea-green);
+  color: var(--udea-white);
+}
+
+
+button {
+  background-color: var(--udea-green);
+  color: var(--udea-white);
+  border: none;
+  padding: 10px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: var(--udea-light-green);
+}

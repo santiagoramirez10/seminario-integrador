@@ -1,0 +1,38 @@
+<section class="hero">
+  <div class="hero__content">
+    <h1>DIMENSIONADOR DE MICRORREDES</h1>
+    <p class="subtitle">
+      Selecciona la región, carga tus datos, configura la simulación y visualiza resultados.
+    </p>
+
+    <!-- Selector de ZNI -->
+    <div class="selector-zni">
+      <label for="zni">Zona No Interconectada:</label>
+      <select id="zni" [(ngModel)]="zonaSeleccionada">
+        <option value="leticia">Leticia</option>
+        <option value="amazonas">Amazonas</option>
+        <option value="providencia">Providencia</option>
+        <option value="puerto_narino">Puerto Nariño</option>
+      </select>
+    </div>
+
+    <a class="cta" routerLink="/cargar-datos" [queryParams]="{ zni: zonaSeleccionada }">
+      Comenzar simulación
+    </a>
+  </div>
+</section>
+
+<section class="grid">
+  <div class="card">
+    <h3>Cargar Datos</h3>
+    <p>Sube demanda (CSV), pronóstico, parámetros e instancia (JSON).</p>
+  </div>
+  <div class="card">
+    <h3>Configuración</h3>
+    <p>Define horizonte, escenarios, robustez y opciones técnicas.</p>
+  </div>
+  <div class="card">
+    <h3>Resultados</h3>
+    <p>KPIs, curvas de generación vs demanda y descargas (CSV/Excel/PDF).</p>
+  </div>
+</section>

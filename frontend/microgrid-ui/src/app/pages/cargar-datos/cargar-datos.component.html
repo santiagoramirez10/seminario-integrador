@@ -1,0 +1,46 @@
+<section class="wrap">
+  <h2>Cargar Datos</h2>
+  <p class="hint">Selecciona la zona y carga los archivos requeridos. También puedes usar un <b>dataset de ejemplo</b> por zona.</p>
+
+  <div class="row">
+    <label>Zona No Interconectada</label>
+    <select [(ngModel)]="zonaSeleccionada">
+      <option *ngFor="let z of zonas" [value]="z.value">{{z.label}}</option>
+    </select>
+    <button class="ghost" (click)="usarEjemplo()">Usar dataset de ejemplo</button>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <h4>Demanda (CSV)</h4>
+      <input type="file" accept=".csv" (change)="onPick('demand', $event)">
+      <p class="filename" *ngIf="files.demand">{{ files.demand?.name }}</p>
+    </div>
+
+    <div class="card">
+      <h4>Pronóstico (CSV) <span class="muted">(opcional)</span></h4>
+      <input type="file" accept=".csv" (change)="onPick('forecast', $event)">
+      <p class="filename" *ngIf="files.forecast">{{ files.forecast?.name }}</p>
+    </div>
+
+    <div class="card">
+      <h4>Parámetros (JSON)</h4>
+      <input type="file" accept=".json" (change)="onPick('parameters', $event)">
+      <p class="filename" *ngIf="files.parameters">{{ files.parameters?.name }}</p>
+    </div>
+
+    <div class="card">
+      <h4>Instancia (JSON)</h4>
+      <input type="file" accept=".json" (change)="onPick('instance', $event)">
+      <p class="filename" *ngIf="files.instance">{{ files.instance?.name }}</p>
+    </div>
+  </div>
+
+  <div class="errors" *ngIf="errors.length">
+    <p *ngFor="let e of errors">• {{e}}</p>
+  </div>
+
+  <div class="actions">
+    <button class="primary" [disabled]="!ready" (click)="continuar()">Continuar</button>
+  </div>
+</section>
