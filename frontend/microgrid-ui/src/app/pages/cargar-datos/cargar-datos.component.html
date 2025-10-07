@@ -1,46 +1,29 @@
-<section class="wrap">
-  <h2>Cargar Datos</h2>
-  <p class="hint">Selecciona la zona y carga los archivos requeridos. También puedes usar un <b>dataset de ejemplo</b> por zona.</p>
-
-  <div class="row">
-    <label>Zona No Interconectada</label>
-    <select [(ngModel)]="zonaSeleccionada">
-      <option *ngFor="let z of zonas" [value]="z.value">{{z.label}}</option>
-    </select>
-    <button class="ghost" (click)="usarEjemplo()">Usar dataset de ejemplo</button>
+<h1>Cargar datos</h1>
+<div class="grid two">
+  <div class="card">
+    <label>Demand CSV <input type="file" accept=".csv" (change)="onFile('demand', $event.target.files[0])"></label>
+    <p class="filename" *ngIf="data.files['demand']">{{ data.files['demand']!.name }}</p>
   </div>
-
-  <div class="grid">
-    <div class="card">
-      <h4>Demanda (CSV)</h4>
-      <input type="file" accept=".csv" (change)="onPick('demand', $event)">
-      <p class="filename" *ngIf="files.demand">{{ files.demand?.name }}</p>
-    </div>
-
-    <div class="card">
-      <h4>Pronóstico (CSV) <span class="muted">(opcional)</span></h4>
-      <input type="file" accept=".csv" (change)="onPick('forecast', $event)">
-      <p class="filename" *ngIf="files.forecast">{{ files.forecast?.name }}</p>
-    </div>
-
-    <div class="card">
-      <h4>Parámetros (JSON)</h4>
-      <input type="file" accept=".json" (change)="onPick('parameters', $event)">
-      <p class="filename" *ngIf="files.parameters">{{ files.parameters?.name }}</p>
-    </div>
-
-    <div class="card">
-      <h4>Instancia (JSON)</h4>
-      <input type="file" accept=".json" (change)="onPick('instance', $event)">
-      <p class="filename" *ngIf="files.instance">{{ files.instance?.name }}</p>
-    </div>
+  <div class="card">
+    <label>Forecast CSV <input type="file" accept=".csv" (change)="onFile('forecast', $event.target.files[0])"></label>
+    <p class="filename" *ngIf="data.files['forecast']">{{ data.files['forecast']!.name }}</p>
   </div>
-
-  <div class="errors" *ngIf="errors.length">
-    <p *ngFor="let e of errors">• {{e}}</p>
+  <div class="card">
+    <label>Parameters JSON <input type="file" accept=".json" (change)="onFile('parameters', $event.target.files[0])"></label>
+    <p class="filename" *ngIf="data.files['parameters']">{{ data.files['parameters']!.name }}</p>
   </div>
-
-  <div class="actions">
-    <button class="primary" [disabled]="!ready" (click)="continuar()">Continuar</button>
+  <div class="card">
+    <label>Instance JSON <input type="file" accept=".json" (change)="onFile('instance', $event.target.files[0])"></label>
+    <p class="filename" *ngIf="data.files['instance']">{{ data.files['instance']!.name }}</p>
   </div>
-</section>
+</div>
+<div class="status">
+  <p [class.ok]="status.demand==='ok'" [class.error]="status.demand==='error'">Demand: {{status.demand}}</p>
+  <p [class.ok]="status.forecast==='ok'" [class.error]="status.forecast==='error'">Forecast: {{status.forecast}}</p>
+  <p [class.ok]="status.parameters==='ok'" [class.error]="status.parameters==='error'">Parameters: {{status.parameters}}</p>
+  <p [class.ok]="status.instance==='ok'" [class.error]="status.instance==='error'">Instance: {{status.instance}}</p>
+</div>
+<div class="actions">
+  <button class="btn" [disabled]="!data.allReady()" (click)="continuar()">Continuar → Configuración</button>
+  <span *ngIf="errorMsg" class="error">{{errorMsg}}</span>
+</div>

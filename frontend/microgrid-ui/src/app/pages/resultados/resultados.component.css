@@ -1,0 +1,4 @@
+.grid.two{display:grid;grid-template-columns:2fr 1fr;gap:12px}
+.card.wide{grid-column:1 / -1}
+img{width:100%;height:auto;border-radius:10px;border:1px solid var(--border)}
+@media (max-width:1000px){ .grid.two{grid-template-columns:1fr} }

@@ -1,11 +1,10 @@
 import { Routes } from '@angular/router';
-import { HomeComponent } from './pages/home/home.component';
-
 export const routes: Routes = [
-  { path: 'home', component: HomeComponent },
+  { path: '', redirectTo: 'inicio', pathMatch: 'full' },
+  { path: 'inicio', loadComponent: () => import('./pages/inicio/inicio.component').then(m => m.InicioComponent) },
   { path: 'cargar-datos', loadComponent: () => import('./pages/cargar-datos/cargar-datos.component').then(m => m.CargarDatosComponent) },
   { path: 'configuracion', loadComponent: () => import('./pages/configuracion/configuracion.component').then(m => m.ConfiguracionComponent) },
-
-  { path: '', pathMatch: 'full', redirectTo: 'home' },
-  { path: '**', redirectTo: 'home' }
+  { path: 'resultados', loadComponent: () => import('./pages/resultados/resultados.component').then(m => m.ResultadosComponent) },
+  { path: 'ayuda', loadComponent: () => import('./pages/ayuda/ayuda.component').then(m => m.AyudaComponent) },
+  { path: '**', redirectTo: 'inicio' }
 ];
